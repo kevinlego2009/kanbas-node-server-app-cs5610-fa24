@@ -6,7 +6,7 @@ export default function QueryParameters(app) {
       case "add":
         result = parseInt(a) + parseInt(b);
         break;
-      case "subtract":
+      case "substract":
         result = parseInt(a) - parseInt(b);
         break;
       // implement multiply and divide on your own
