@@ -13,19 +13,19 @@ import EnrollmentsRoutes from "./Kanbas/Enrollments/routes.js";
 
 const app = express();
 
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: process.env.NETLIFY_URL || "http://localhost:3000",
-//   })
-// );
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.NETLIFY_URL || "http://localhost:3000",
+  })
+);
 
-const corsOptions = {
-  origin: "https://a5--mellow-axolotl-011755.netlify.app", // Your frontend URL
-  credentials: true,
-};
+// const corsOptions = {
+//   origin: "https://a5--mellow-axolotl-011755.netlify.app", // Your frontend URL
+//   credentials: true,
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 const sessionOptions = {
   secret: process.env.SESSION_SECRET || "kanbas",
