@@ -52,7 +52,7 @@ export default function CourseRoutes(app) {
     const { courseId } = req.params;
     const status = dao.deleteCourse(courseId);
 
-    const {enrollments} = Database;
+    let {enrollments} = Database;
     enrollments = enrollments.filter((enrollment) => {enrollment.course === courseId});
     res.send(status);
   });
