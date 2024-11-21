@@ -1,6 +1,8 @@
 import * as dao from "./dao.js";
 import * as modulesDao from "../Modules/dao.js";
 import * as assignmentsDao from "../Assignments/dao.js";
+import * as enrollmentsDao from "../Enrollments/dao.js";
+import Database from "../Database/index.js";
 
 export default function CourseRoutes(app) {
   // get modules for that course
@@ -49,6 +51,9 @@ export default function CourseRoutes(app) {
   app.delete("/api/courses/:courseId", (req, res) => {
     const { courseId } = req.params;
     const status = dao.deleteCourse(courseId);
+
+    const {enrollments} = Database;
+    enrollments = enrollments.filter((enrollment) => {enrollment.course === courseId});
     res.send(status);
   });
 
