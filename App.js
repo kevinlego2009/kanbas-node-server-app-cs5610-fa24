@@ -20,20 +20,11 @@ const app = express();
 //   })
 // );
 
-const allowedOrigins = [
-  'http://localhost:3000', // For development
-  'https://a5--mellow-axolotl-011755.netlify.app', // For production
-];
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: "https://a5--mellow-axolotl-011755.netlify.app", // Your frontend URL
   credentials: true,
 };
+
 app.use(cors(corsOptions));
 
 const sessionOptions = {
