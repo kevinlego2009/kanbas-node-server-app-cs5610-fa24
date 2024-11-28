@@ -12,6 +12,8 @@ import cors from "cors";
 import session from "express-session";
 import EnrollmentsRoutes from "./Kanbas/Enrollments/routes.js";
 
+console.log("Environment Variables:", process.env.MONGO_CONNECTION_STRING);
+
 const CONNECTION_STRING =
   process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas";
 mongoose.connect(CONNECTION_STRING);
