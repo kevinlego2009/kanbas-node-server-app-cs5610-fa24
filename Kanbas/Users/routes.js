@@ -90,6 +90,7 @@ export default function UserRoutes(app) {
   const findCoursesForUser = async (req, res) => {
     const currentUser = req.session["currentUser"];
     if (!currentUser) {
+      console.log("No currentuser in Users/routes.js line 93");
       res.sendStatus(401);
       return;
     }
