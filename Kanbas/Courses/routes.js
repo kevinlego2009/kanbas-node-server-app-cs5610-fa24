@@ -15,6 +15,14 @@ export default function CourseRoutes(app) {
     res.json(course);
   });
 
+  // get people for that course
+  const findUsersForCourse = async (req, res) => {
+    const { cid } = req.params;
+    const users = await enrollmentsDao.findUsersForCourse(cid);
+    res.json(users);
+  };
+  app.get("/api/courses/:cid/users", findUsersForCourse);
+
   // get modules for that course
   app.get("/api/courses/:courseId/modules", async (req, res) => {
     const { courseId } = req.params;
@@ -58,15 +66,39 @@ export default function CourseRoutes(app) {
   });
 
   // delete course
+  // app.delete("/api/courses/:courseId", async (req, res) => {
+  //   const { courseId } = req.params;
+  //   const status = await dao.deleteCourse(courseId);
+
+  //   // let { enrollments } = Database;
+  //   // enrollments = enrollments.filter((enrollment) => {
+  //   //   enrollment.course === courseId;
+  //   // });
+  //   res.send(status);
+  // });
   app.delete("/api/courses/:courseId", async (req, res) => {
     const { courseId } = req.params;
-    const status = await dao.deleteCourse(courseId);
-
-    // let { enrollments } = Database;
-    // enrollments = enrollments.filter((enrollment) => {
-    //   enrollment.course === courseId;
-    // });
-    res.send(status);
+  
+    try {
+      // Delete the course
+      const courseStatus = await dao.deleteCourse(courseId);
+  
+      if (courseStatus.acknowledged && courseStatus.deletedCount > 0) {
+        // If the course was successfully deleted, delete related enrollments
+        const enrollmentsStatus = await enrollmentsDao.deleteEnrollmentsByCourse(courseId);
+  
+        res.send({
+          message: "Course and associated enrollments deleted successfully",
+          courseStatus,
+          enrollmentsStatus,
+        });
+      } else {
+        res.status(404).send({ message: "Course not found" });
+      }
+    } catch (error) {
+      console.error("Error deleting course and enrollments:", error);
+      res.status(500).send({ error: "Failed to delete course and enrollments" });
+    }
   });
 
   // update course

@@ -40,3 +40,12 @@ export function enrollUserInCourse(user, course) {
 export function unenrollUserFromCourse(user, course) {
   return model.deleteOne({ user, course });
 }
+
+export function deleteEnrollmentsByCourse(courseId) {
+  try {
+    return model.deleteMany({ course: courseId });
+  } catch (error) {
+    console.error("Error deleting enrollments by courseId:", error);
+    throw new Error("Failed to delete enrollments for the course");
+  }
+}
