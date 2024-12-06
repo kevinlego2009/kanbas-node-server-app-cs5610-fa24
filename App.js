@@ -12,6 +12,10 @@ import CourseRoutes from "./Kanbas/Courses/routes.js";
 import ModuleRoutes from "./Kanbas/Modules/routes.js";
 import AssignmentRoutes from "./Kanbas/Assignments/routes.js";
 import EnrollmentsRoutes from "./Kanbas/Enrollments/routes.js";
+import QuizzesRoutes from "./Kanbas/Quizzes/routes.js";
+import QuestionsRoutes from "./Kanbas/Questions/routes.js";
+import AttemptsRoutes from "./Kanbas/Attempts/routes.js";
+import PreviewsRoutes from "./Kanbas/Previews/routes.js";
 
 console.log("Environment Variables:", process.env.MONGO_CONNECTION_STRING);
 
@@ -61,5 +65,9 @@ CourseRoutes(app);
 ModuleRoutes(app);
 AssignmentRoutes(app);
 EnrollmentsRoutes(app);
+QuizzesRoutes(app);
+QuestionsRoutes(app);
+AttemptsRoutes(app);
+PreviewsRoutes(app);
 
 app.listen(process.env.PORT || 4000);
