@@ -88,6 +88,8 @@ export default function UserRoutes(app) {
 
   // for course
   const findCoursesForUser = async (req, res) => {
+    console.log("Session Data:", req.session);
+
     const currentUser = req.session["currentUser"];
     if (!currentUser) {
       console.log("No currentuser in Users/routes.js line 93");
