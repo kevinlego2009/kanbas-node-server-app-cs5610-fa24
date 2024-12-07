@@ -3,6 +3,8 @@ import * as dao from "./dao.js";
 export default function QuizzesRoutes(app) {
   // Create a new quiz
   app.post("/api/quizzes", async (req, res) => {
+    console.log("Request received at /api/quizzes", req.body);
+
     try {
       const quizData = req.body;
       const createdQuiz = await dao.createQuiz(quizData);
