@@ -2,6 +2,7 @@ import model from "./model.js"; // Your Attempt Mongoose model
 
 export async function createAttempt(attemptData) {
   try {
+    delete attemptData._id;
     return await model.create(attemptData);
   } catch (error) {
     console.error("Error creating attempt:", error);

@@ -2,6 +2,7 @@ import model from "./model.js"; // Your Question Mongoose model
 
 export async function createQuestion(questionData) {
   try {
+    delete questionData._id;
     return await model.create(questionData);
   } catch (error) {
     console.error("Error creating question:", error);

@@ -2,6 +2,7 @@ import model from "./model.js"; // Your Preview Mongoose model
 
 export async function createPreview(previewData) {
   try {
+    delete previewData._id;
     return await model.create(previewData);
   } catch (error) {
     console.error("Error creating preview:", error);

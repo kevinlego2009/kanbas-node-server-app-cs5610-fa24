@@ -2,6 +2,7 @@ import model from "./model.js"; // Your Quiz Mongoose model
 
 export async function createQuiz(quizData) {
   try {
+    delete quizData._id;
     return await model.create(quizData);
   } catch (error) {
     console.error("Error creating quiz:", error);
