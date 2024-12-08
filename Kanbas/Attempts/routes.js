@@ -69,4 +69,30 @@ export default function AttemptsRoutes(app) {
       res.status(500).json({ error: error.message });
     }
   });
+
+  app.get("/api/attempts/:quizId/:courseId", async (req, res) => {
+    try {
+      const { courseId, quizId } = req.params; // Destructure in one line
+      const attempts = await dao.findAttemptsByQuizAndCourse(quizId, courseId);
+      res.status(200).json(attempts);
+    } catch (error) {
+      console.error("Error in /api/attempts/:quizId/:courseId:", error);
+      res
+        .status(500)
+        .json({ error: error.message || "Failed to fetch attempts." });
+    }
+  });
+
+  app.get("/api/users/:userId/attempts/:quizId",async (req, res)=> {
+    try {
+      const { userId, quizId } = req.params; 
+      const attempts = await dao.findAttemptsByQuizAndUser(quizId, userId);
+      res.status(200).json(attempts);
+    } catch (error) {
+      console.error("Error in /api/attempts/:quizId/:courseId:", error);
+      res
+        .status(500)
+        .json({ error: error.message || "Failed to fetch attempts." });
+    }
+  })
 }
